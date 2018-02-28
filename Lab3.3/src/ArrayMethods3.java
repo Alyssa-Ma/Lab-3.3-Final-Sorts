@@ -11,9 +11,8 @@ public class ArrayMethods3
 	{
 		//Testing arrays
 		String [] test1 = {"fishy", "kitty", "daughter", "no", "yes", "foo", "bar", "baz"};
-		int [] test3 = {};
+		int [] test2 = {4, 8, 6, 5, 1, 3, 7, 9, 2, 0};
 		
-		//Merge Sort
 		long start = System.nanoTime();
 		String[] mergeSortResult = mergeSort(test1);
 		long end = System.nanoTime();
@@ -21,18 +20,26 @@ public class ArrayMethods3
 		System.out.println("Merge sort time: " + time + " nanoseconds.");
 		System.out.println(Arrays.toString(mergeSortResult));
 		
-		//Partition
 		start = System.nanoTime();
-		int = 
-		//Quick Sort
+		end = System.nanoTime();
+		time = end - start;
+		quickSort(test2, 0, test2.length-1);
+		System.out.println("Quick sort time: " + time + " nanoseconds.");
+		System.out.println(Arrays.toString(test2));
+		
 	}
 	public static String[] mergeSort(String [] list)
 	{
 		//use copyOfRange to copy the array
 		//split the array and merge sort both sides, when both halves are length 1, merge
 		//keep dividing array into half
-		int start;
-		int end;
+		
+		if(list.length == 1)
+		{
+			return list;
+		}
+		
+		
 		
 	}
 	public static int partition(int list1, int front, int back)
@@ -45,53 +52,6 @@ public class ArrayMethods3
 		
 		if(back > front)
 		{
-			/**
-			 * old partition method, needs to be updated
-			 * {
-		int x = 0;
-		int y = list.length - 1;
-		int z = 0;
-		int aa = 0;
-		
-		while(x != y)
-		{
-			//two sides of array
-			if(list[x] > list[y] && (x < y))
-			{
-				swap(list, x, y);
-				
-				z = x;
-				x = y;
-				y = z + 1;
-			}
-			else if((list[x] < list[y]) && (x > y))
-			{
-				swap(list, x, y);
-				
-				z = x;
-				x = y;
-				y = z - 1;
-			}
-			else if(x > y)
-			{
-				y++;
-			}
-			else if(x < y)
-			{
-				y--;
-			}
-		}
-		return x;
-	}
-	
-	//helper method to swap items
-	public static void swap(int[] list, int in, int in2)
-	{
-		int n = list[in];
-		list[in] = list[in2];
-		list[in2] = n;
-	}
-			 */
 			int piv = partition(list1, front, back);
 			
 			//left side
@@ -99,11 +59,38 @@ public class ArrayMethods3
 			
 			//right side
 			quickSort(list1, piv+1, back);
+			
+			
+		}
+		
+	}
+	
+	public static int partition(int [] list1, int front, int back)
+	{
+		int piv = list1[front];
+		
+		while(front < back)
+		{
+			while(list1[front] < piv)
+			{
+				front++;
+			}
+			while(list1[back] > piv)
+			{
+				back--;
+			}
+			if(front <= back)
+			{
+				swap(list1, front, back);
+			}
 		}
 	}
 	
-	
-	
-	
-	
+	//helper method to swap items
+		public static void swap(int[] list, int in, int in2)
+		{
+			int n = list[in];
+			list[in] = list[in2];
+			list[in2] = n;
+		}
 }
